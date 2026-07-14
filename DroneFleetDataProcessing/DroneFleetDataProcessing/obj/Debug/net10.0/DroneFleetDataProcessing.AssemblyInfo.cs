@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DroneFleetDataProcessing")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+88ec8129db511252107b88c852d4257c703ad152")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d78bb88903eba323917e9a94d590306f0badbbd1")]
 [assembly: System.Reflection.AssemblyProductAttribute("DroneFleetDataProcessing")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DroneFleetDataProcessing")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
