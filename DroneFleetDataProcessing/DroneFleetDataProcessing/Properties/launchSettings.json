@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "DroneFleetDataProcessing": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
