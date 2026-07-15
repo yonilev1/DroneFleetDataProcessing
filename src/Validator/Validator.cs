@@ -1,35 +1,13 @@
 using System;
 using System.Text.RegularExpressions;
+using DroneFleetDataProcessing.SetClass;
 using DroneFleetDataProcessing.drone;
-namespace DroneFleetDataProcessingSystem.ValidatorClass
+namespace DroneFleetDataProcessing.ValidatorClass
 {
     class DroneValidator
     {
-        private HashSet<string> _validModel = new()
-        {
-            "Falcon-X",
-            "Raven-M",
-            "SkyEye-2",
-            "CargoBee",
-            "Storm-4",
-            "Scout-Lite"
-        };
-        private HashSet<string> _validCategory = new()
-        {
-            "Recon",
-            "Patrol",
-            "Mapping",
-            "Delivery",
-            "Search"
-        };
-        private HashSet<string> _validBaseLocation = new()
-        {
-            "North",
-            "South",
-            "Central",
-            "East",
-            "West"
-        };
+        SetDrone sd = new SetDrone();
+        
         private List<Drone> _validatedDrones;
         public DroneValidator(List<Drone> drones)
         {
@@ -56,19 +34,19 @@ namespace DroneFleetDataProcessingSystem.ValidatorClass
         }
         private bool IsValidModel(string model)
         {
-            if (! _validModel.Contains(model))
+            if (!sd.ValidModel.Contains(model))
                 return false;
             return true;
         }
         private bool IsValidCategory(string category)
         {
-            if (!_validCategory.Contains(category))
+            if (!sd.ValidCategory.Contains(category))
                 return false;
             return true;
         }
         private bool isValidBaseLocatoins(string baseLocations)
         {
-            if(!_validBaseLocation.Contains(baseLocations))
+            if(!sd.ValidBaseLocation.Contains(baseLocations))
                 return false;
             return true;
         }
@@ -98,7 +76,9 @@ namespace DroneFleetDataProcessingSystem.ValidatorClass
         }
         private bool isValidStatus(string status)
         {
-
+            if(!sd.ValidStatus.Contains(status))
+                return false;
+            return true;
         }
     }
 }
