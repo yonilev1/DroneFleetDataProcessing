@@ -74,11 +74,15 @@ namespace DroneFleetDataProcessingSystem.ValidatorClass
         }
         private bool isValidFlithHours(double flithHours)
         {
-
+            if (flithHours < 0 || flithHours > 2500)
+                return false;
+            return true;
         }
         private bool isValidBaterryHelth(int baterryHlth)
         {
-
+            if (baterryHlth < 0 ||  baterryHlth > 100)
+                return false;
+            return true;
         }
         private bool isValidMaxRenge(int maxRenge)
         {
