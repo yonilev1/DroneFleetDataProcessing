@@ -28,7 +28,7 @@ namespace DroneFleetDataProcessing.Report
                 File.AppendAllText(_outPutPath,$"{drone} \n");
             }
             
-            
+
             File.AppendAllText(_outPutPath,"TOP 5 DRONES BY FLIGHT HOURS \n");
             foreach (string item in TopFiveFlingHours())
             {
@@ -41,8 +41,8 @@ namespace DroneFleetDataProcessing.Report
             foreach(string type in GetAllDitictTyps())
             {
                 File.AppendAllText(_outPutPath,$"{type} \n");
-            }
-
+        }
+            
             File.AppendAllText(_outPutPath,"DRONES BY BASE \n");
             foreach (string item in GetNumberOfdronsPerbase())
             {
@@ -54,6 +54,9 @@ namespace DroneFleetDataProcessing.Report
             {
                 File.AppendAllText(_outPutPath, $"{item} \n");
             }
+
+            Console.WriteLine("Step 5: Performing analysis... Analysis completed successfully");
+            Console.WriteLine($"Step 6: Generating report... Report generated successfully: {_outPutPath}");
         }
         private IEnumerable<string> OnOperations()
         {

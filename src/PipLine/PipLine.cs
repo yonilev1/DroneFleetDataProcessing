@@ -1,11 +1,12 @@
+using DroneFleetDataProcessing.customexceptions;
+using DroneFleetDataProcessing.drone;
+using DroneFleetDataProcessing.reader;
+using DroneFleetDataProcessing.Report;
+using DroneFleetDataProcessing.ValidatorClass;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
-using DroneFleetDataProcessing.drone;
-using DroneFleetDataProcessing.ValidatorClass;
-using DroneFleetDataProcessing.customexceptions;
-using DroneFleetDataProcessing.reader;
 
 namespace DroneFleetDataProcessing.pipeline
 {
@@ -99,6 +100,9 @@ namespace DroneFleetDataProcessing.pipeline
             }
 
             WriteNewFile();
+
+            List<Drone>FilteredDrons = reader.GetData(OutputPath);
+            ReportGenerator report = new ReportGenerator(OutputPath, rawDrones.Count, drones);
         }
     }
 }
