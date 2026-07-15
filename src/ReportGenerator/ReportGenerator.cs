@@ -27,6 +27,10 @@ namespace DroneFleetDataProcessing.Report
         {
             return _allDataLen - _drones.Count;
         }
+        private IEnumerable<Drone> TopFiveFlingHours()
+        {
+            return _drones.OrderByDescending(d => d.flightHours).Take(5);
+        }
         
     }
 }
