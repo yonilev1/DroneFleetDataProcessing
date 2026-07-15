@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 using DroneFleetDataProcessing.drone;
 namespace DroneFleetDataProcessingSystem.ValidatorClass
 {
@@ -23,7 +24,10 @@ namespace DroneFleetDataProcessingSystem.ValidatorClass
         }
         private bool IsvalidSerialNumber(string SN)
         {
+            if (_validatedDrones.Any(x => x.serialNumber == SN) || !Regex.IsMatch(SN, @"^DR-\d{4}$"))
+                return false;
 
+            return true;
         }
         private bool IsValidModel(string model)
         {
