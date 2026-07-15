@@ -193,5 +193,5 @@ class Validations
 
 ------------------------------------------------------------
 ## Why we chose this design
-To comply with the "SOLID" rules, the system is protected 
+To comply with the "SOLID" rules, the system is protected
 from errors; each problem has its own error.
