@@ -27,7 +27,7 @@ namespace DroneFleetDataProcessing.ValidatorClass
                 && IsValidMissionsCompleted(drone.missionsCompleted)
                 && IsValidStatus(drone.status);
         }
-        private bool IsValidId(int id)
+        private bool IsValidId(int? id)
         {
             if (_validatedDrones.Any(x => x.id == id) || id < 1)
                 return false;
@@ -59,25 +59,25 @@ namespace DroneFleetDataProcessing.ValidatorClass
                 return false;
             return true;
         }
-        private bool IsValidFlithHours(double flithHours)
+        private bool IsValidFlithHours(double? flithHours)
         {
             if (flithHours < 0 || flithHours > 2500)
                 return false;
             return true;
         }
-        private bool IsValidBaterryHelth(int baterryHlth)
+        private bool IsValidBaterryHelth(int? baterryHlth)
         {
             if (baterryHlth < 0 ||  baterryHlth > 100)
                 return false;
             return true;
         }
-        private bool IsValidMaxRenge(double maxRenge)
+        private bool IsValidMaxRenge(double? maxRenge)
         {
             if(maxRenge < 1 ||  maxRenge > 150)
                 return false;
             return true;
         }
-        private bool IsValidMissionsCompleted(int missionsCompleted)
+        private bool IsValidMissionsCompleted(int? missionsCompleted)
         {
             if (missionsCompleted < 0 ||  missionsCompleted > 5000)
                 return false;
