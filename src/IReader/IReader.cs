@@ -1,6 +1,8 @@
-namespace Ireader.ireader;
+using DroneFleetDataProcessing.drone;
+
+namespace DroneFleetDataProcessing.Ireader;
 
 interface IReader
 {
-	public string GetData(string path);
+	public List<Drone> GetData(string path);
 }
