@@ -99,23 +99,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Yonil\\.nuget\\packages\\": {},
+    "C:\\Users\\mordy\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Yonil\\source\\repos\\DroneFleetDataProcessing\\DroneFleetDataProcessing.csproj",
+      "projectUniqueName": "C:\\Users\\mordy\\source\\repos\\DroneFleetDataProcessing\\DroneFleetDataProcessing.csproj",
       "projectName": "DroneFleetDataProcessing",
-      "projectPath": "C:\\Users\\Yonil\\source\\repos\\DroneFleetDataProcessing\\DroneFleetDataProcessing.csproj",
-      "packagesPath": "C:\\Users\\Yonil\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Yonil\\source\\repos\\DroneFleetDataProcessing\\obj\\",
+      "projectPath": "C:\\Users\\mordy\\source\\repos\\DroneFleetDataProcessing\\DroneFleetDataProcessing.csproj",
+      "packagesPath": "C:\\Users\\mordy\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\mordy\\source\\repos\\DroneFleetDataProcessing\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Yonil\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mordy\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
