@@ -27,6 +27,14 @@ class Program
         string outputPath = Path.Combine(outputDirectoryPath, outputFileName);
 
         Pipeline pipline = new Pipeline(inputPath, outputPath);
-        pipline.ExecutePipeline(inputPath);
+        try
+        {
+            pipline.ExecutePipeline();
+
+        }
+        catch (AllDataIsInvalidException ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
     }
 }

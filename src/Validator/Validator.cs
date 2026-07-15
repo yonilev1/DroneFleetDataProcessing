@@ -20,7 +20,7 @@ namespace DroneFleetDataProcessing.ValidatorClass
                 && IsValidSerialNumber(drone.serialNumber)
                 && IsValidModel(drone.model)
                 && IsValidCategory(drone.category)
-                && IsValidBaseLocatoins(drone.baseLocation)
+                && IsValidBaseLocatoins(drone.base_location)
                 && IsValidFlithHours(drone.flightHours)
                 && IsValidBaterryHelth(drone.batteryHealth)
                 && IsValidMaxRenge(drone.maxRangeKm)
@@ -34,26 +34,26 @@ namespace DroneFleetDataProcessing.ValidatorClass
             
             return true;
         }
-        private bool IsValidSerialNumber(string SN)
+        private bool IsValidSerialNumber(string? SN)
         {
             if (_validatedDrones.Any(x => x.serialNumber == SN) || !Regex.IsMatch(SN, @"^DR-\d{4}$"))
                 return false;
 
             return true;
         }
-        private bool IsValidModel(string model)
+        private bool IsValidModel(string? model)
         {
             if (!sd.ValidModel.Contains(model))
                 return false;
             return true;
         }
-        private bool IsValidCategory(string category)
+        private bool IsValidCategory(string? category)
         {
             if (!sd.ValidCategory.Contains(category))
                 return false;
             return true;
         }
-        private bool IsValidBaseLocatoins(string baseLocations)
+        private bool IsValidBaseLocatoins(string? baseLocations)
         {
             if(!sd.ValidBaseLocation.Contains(baseLocations))
                 return false;
@@ -83,7 +83,7 @@ namespace DroneFleetDataProcessing.ValidatorClass
                 return false;
             return true;
         }
-        private bool IsValidStatus(string status)
+        private bool IsValidStatus(string? status)
         {
             if(!sd.ValidStatus.Contains(status))
                 return false;

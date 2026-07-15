@@ -6,7 +6,7 @@ class Drone
 	public string? serialNumber { get; set; }
 	public string? model { get; set; }
 	public string? category { get; set; }
-	public string? baseLocation { get; set; }
+	public string? base_location { get; set; }
 	public double? flightHours { get; set; }
 	public int? batteryHealth { get; set; }
 	public double? maxRangeKm { get; set; }
