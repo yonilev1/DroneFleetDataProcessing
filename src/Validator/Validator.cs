@@ -86,7 +86,9 @@ namespace DroneFleetDataProcessingSystem.ValidatorClass
         }
         private bool isValidMaxRenge(int maxRenge)
         {
-
+            if(maxRenge < 1 ||  maxRenge > 150)
+                return false;
+            return true;
         }
         private bool isValidMissionsCompleted(int missionsCompleted)
         {
