@@ -4,12 +4,13 @@ using System.IO;
 using System.Text.Json;
 using DroneFleetDataProcessing.drone;
 using DroneFleetDataProcessing.ValidatorClass;
+using DroneFleetDataProcessing.customexceptions;
 
 namespace DroneFleetDataProcessing.pipeline
 {
     class Pipeline
     {
-        public string Data { get; set; }
+        public string InputPath { get; set; }
         public string OutputPath { get; set; }
         public DroneValidator Validator { get; set; }
         public List<Drone> ValidDroneReports { get; set; }
@@ -24,38 +25,44 @@ namespace DroneFleetDataProcessing.pipeline
             Validator = new DroneValidator(ValidDroneReports);
         }
 
-        private void Parse()
+
+        private void serelize() 
         {
-            try
+        
+        }
+        private void Validate()
+        {
+        
+            foreach (Drone drone in )
             {
-
-                List<Drone> parsedReports = JsonSerializer.Deserialize<List<Drone>>(Data) ?? new();
-
-                if (parsedReports.Count == 0)
-                    
-
-                foreach (Drone drone in parsedReports)
+                try
                 {
-
-                    
                     if (!Validator.Excecute(drone))
                     {
                         RejectedCount++;
+                        throw new UnserelazeblleDataException("data not serelisable");
+                                        
                     }
                 }
-            }
-            catch (JsonException ex)
-            {
+                catch (UnserelazeblleDataException ex)
+                {
 
-                Console.WriteLine(ex.Message);
+                }
+
+              
+                
+            }
+            
+            if (ValidDroneReports.Count == 0)
+            {
+                throw new AllDataIsInvalidException("report file is full of invalid data");
             }
         }
 
         private void WriteNewFile()
         {
             try
-            {
-                
+            {   
                 var options = new JsonSerializerOptions { WriteIndented = true };
                 string json = JsonSerializer.Serialize(ValidDroneReports, options);
 
