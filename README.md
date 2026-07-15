@@ -98,18 +98,17 @@ It runs the code of all commands in order, \
 including checking the received data and extracting specific data from the file.
 
 #### Fils:
-string data \
-outPutPath \
+string InputFilePath \
+string OutputPath \
 validator \
-regected
+ValidDroneReports
 
 #### Constractor:
 validator
 
 #### Methods:
-Parse() \
-RightNewFile() \
-Exsecute()
+WriteNewFile \
+ExecutePipeline
 
 ----------------------------------------
 ### CustomExseptions
