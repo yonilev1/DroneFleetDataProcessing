@@ -32,6 +32,7 @@ namespace DroneFleetDataProcessing.pipeline
                 string json = JsonSerializer.Serialize(ValidDroneReports, options);
 
                 File.WriteAllText(OutputPath, json);
+                Console.WriteLine($"Step 3: Saving clean data... Clean data saved to: {OutputPath}");
             }
             catch (IOException ex)
             {
@@ -41,7 +42,7 @@ namespace DroneFleetDataProcessing.pipeline
 
         public void ExecutePipeline()
         {
-            Console.WriteLine("Step 1: Reading raw data...");
+            Console.WriteLine("Step 1: Reading raw data...Read records from raw file");
 
             JsonReader reader = new JsonReader();
             List<Drone> rawDrones;
@@ -83,7 +84,7 @@ namespace DroneFleetDataProcessing.pipeline
                 return;
             }
 
-            Console.WriteLine("Step 2: Validating data and creating clean dataset...");
+            Console.WriteLine("Step 2: idating data and creating clean dataset... Valid records: Rejected records:");
 
             foreach (var drone in rawDrones)
             {
