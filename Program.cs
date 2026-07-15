@@ -17,8 +17,16 @@ class Program
 
         string outputFoldername = "output";
         string outputFileName = "drones_clean.json";
-        string outputPath = Path.Combine(baseDirectory, outputFoldername, outputFileName);
+
+        string outputDirectoryPath = Path.Combine(baseDirectory, outputFoldername);
+        if (!Directory.Exists(outputDirectoryPath))
+        {
+            Directory.CreateDirectory(outputDirectoryPath);
+        }
+
+        string outputPath = Path.Combine(outputDirectoryPath, outputFileName);
 
         Pipeline pipline = new Pipeline(inputPath, outputPath);
+        pipline.ExecutePipeline(inputPath);
     }
 }
