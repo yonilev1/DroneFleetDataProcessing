@@ -10,12 +10,14 @@ class Pipline
     public string OutputPath { get; set; }
     public DroneValidator Validator { get; set; }
     public List<Drone> ValidDroneReports { get; set; }
-
     public int RegectedCount { get; set; }
-    public Pipline(string data, string outputPath, DroneValidator validator)
+
+    public Pipline(string data, string outputPath)
     {
         Data = data;
         OutputPath = outputPath;
-        Validator = validator;
+        ValidDroneReports = new List<Drone>();
+        Validator = new DroneValidator(ValidDroneReports);
+
     }
 }
