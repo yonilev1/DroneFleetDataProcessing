@@ -17,7 +17,46 @@ namespace DroneFleetDataProcessing.Report
         }
         public void Execute()
         {
+            File.WriteAllText(_outPutPath,"DRONE FLEET ANALYSIS REPORT \n" +
+                $"Total raw records: {_allDataLen} \n" +
+                $"Valid records: {_drones.Count} \n" +
+                $"Rejected records: {RegectedData()} \n" +
+                $"\n" +
+                $"Operational \n");
+            foreach (string drone in OnOperations())
+            {
+                File.AppendAllText(_outPutPath,$"{drone} \n");
+            }
+            
 
+            File.AppendAllText(_outPutPath,"TOP 5 DRONES BY FLIGHT HOURS \n");
+            foreach (string item in TopFiveFlingHours())
+            {
+                int count = 1;
+                File.AppendAllText(_outPutPath,$"{count}.{item} \n");
+                count++;
+            }
+
+            File.AppendAllText(_outPutPath,"AVAILABLE DRONE MODELS \n");
+            foreach(string type in GetAllDitictTyps())
+            {
+                File.AppendAllText(_outPutPath,$"{type} \n");
+        }
+            
+            File.AppendAllText(_outPutPath,"DRONES BY BASE \n");
+            foreach (string item in GetNumberOfdronsPerbase())
+            {
+                File.AppendAllText(_outPutPath,$"{item} \n");
+            }
+            
+            File.AppendAllText(_outPutPath, "AVERAGE BATTERY HEALTH BY MODEL");
+            foreach (string item in AverageBatteryByType())
+            {
+                File.AppendAllText(_outPutPath, $"{item} \n");
+            }
+
+            Console.WriteLine("Step 5: Performing analysis... Analysis completed successfully");
+            Console.WriteLine($"Step 6: Generating report... Report generated successfully: {_outPutPath}");
         }
         private IEnumerable<string> OnOperations()
         {
@@ -29,7 +68,7 @@ namespace DroneFleetDataProcessing.Report
             return _drones.OrderByDescending(d => d.flightHours).Take(5).Select(d=>$"{d.serialNumber} | {d.model} | {d.flightHours}");
         }
 
-        private int CountValidData()
+        private int RegectedData()
         {
             return _allDataLen - _drones.Count;
         }
