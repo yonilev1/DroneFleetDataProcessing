@@ -9,6 +9,7 @@ class Program
 {
     static void Main()
     {
+        Console.WriteLine(" === Drone Fleet Data Processing System ===");
         string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
         string folderName = "input";
         string innerFolderName = "raw";
@@ -36,5 +37,6 @@ class Program
         {
             Console.WriteLine(ex.Message);
         }
+        Console.WriteLine("=== Process completed successfully! ===");
     }
 }
