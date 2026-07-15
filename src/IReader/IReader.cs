@@ -1,4 +1,4 @@
-namespace IReader.ireader;
+namespace Ireader.ireader;
 
 interface IReader
 {
