@@ -29,11 +29,13 @@ namespace DroneFleetDataProcessing.pipeline
             try
             {
 
-                List<Drone> parsedReports = JsonSerializer.Deserialize<List<Drone>>(Data);
+                List<Drone> parsedReports = JsonSerializer.Deserialize<List<Drone>>(Data) ?? new();
+
+                if (parsedReports.Count == 0)
+                    
 
                 foreach (Drone drone in parsedReports)
                 {
-                    if (drone == null) continue;
 
                     
                     if (!Validator.Excecute(drone))
