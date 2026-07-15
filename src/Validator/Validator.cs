@@ -16,7 +16,16 @@ namespace DroneFleetDataProcessing.ValidatorClass
         }
         public bool Excecute(Drone drone)
         {
-            return true;
+            return IsValidId(drone.id)
+                && IsValidSerialNumber(drone.serialNumber)
+                && IsValidModel(drone.model)
+                && IsValidCategory(drone.category)
+                && IsValidBaseLocatoins(drone.baseLocation)
+                && IsValidFlithHours(drone.flightHours)
+                && IsValidBaterryHelth(drone.batteryHealth)
+                && IsValidMaxRenge(drone.maxRangeKm)
+                && IsValidMissionsCompleted(drone.missionsCompleted)
+                && IsValidStatus(drone.status);
         }
         private bool IsValidId(int id)
         {
@@ -25,7 +34,7 @@ namespace DroneFleetDataProcessing.ValidatorClass
             
             return true;
         }
-        private bool IsvalidSerialNumber(string SN)
+        private bool IsValidSerialNumber(string SN)
         {
             if (_validatedDrones.Any(x => x.serialNumber == SN) || !Regex.IsMatch(SN, @"^DR-\d{4}$"))
                 return false;
@@ -44,37 +53,37 @@ namespace DroneFleetDataProcessing.ValidatorClass
                 return false;
             return true;
         }
-        private bool isValidBaseLocatoins(string baseLocations)
+        private bool IsValidBaseLocatoins(string baseLocations)
         {
             if(!sd.ValidBaseLocation.Contains(baseLocations))
                 return false;
             return true;
         }
-        private bool isValidFlithHours(double flithHours)
+        private bool IsValidFlithHours(double flithHours)
         {
             if (flithHours < 0 || flithHours > 2500)
                 return false;
             return true;
         }
-        private bool isValidBaterryHelth(int baterryHlth)
+        private bool IsValidBaterryHelth(int baterryHlth)
         {
             if (baterryHlth < 0 ||  baterryHlth > 100)
                 return false;
             return true;
         }
-        private bool isValidMaxRenge(int maxRenge)
+        private bool IsValidMaxRenge(double maxRenge)
         {
             if(maxRenge < 1 ||  maxRenge > 150)
                 return false;
             return true;
         }
-        private bool isValidMissionsCompleted(int missionsCompleted)
+        private bool IsValidMissionsCompleted(int missionsCompleted)
         {
             if (missionsCompleted < 0 ||  missionsCompleted > 5000)
                 return false;
             return true;
         }
-        private bool isValidStatus(string status)
+        private bool IsValidStatus(string status)
         {
             if(!sd.ValidStatus.Contains(status))
                 return false;

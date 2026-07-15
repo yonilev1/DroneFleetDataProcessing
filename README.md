@@ -34,7 +34,19 @@ DroneFleetDataProcessing/
 │   ├── drones_clean.json (created at runtime)
 │   └── analysis_report.txt (created at runtime)
 ├── src/
-│   └── מבנה הקוד ייקבע על ידי הצוות
+│   ├── Drone
+|       └── Drone.cs
+|   ├── Exceptions
+|       └── CustomExceptions.cs
+|   ├── IReader
+|		└──IReader.cs 
+|   ├── PipLine
+|		└── PipLine.cs
+|   ├── Reader
+|		└── Reader.cs
+|   └──  Validator
+|		├── Validator.cs
+|		└── Set.cs
 └── README.md
 ```
 
@@ -59,11 +71,25 @@ exists for easily changing the type of data source
 
 ### class Drone
 creation of a Drone object from information \
-received from an external data source
+received from an external data source \
 
-### class ReadJson
-implements the "IReader" interface \
-Methods: \
+#### propertis
+public int id { get; set; } \
+public string serialNumber { get; set; } \
+public string model { get; set; } \
+public string category { get; set; } \
+public string base_location { get; set; } \
+public double flightHours { get; set; } \
+public int batteryHealth { get; set; } \
+public double maxRangeKm { get; set; } \
+public int missionsCompleted { get; set; } \
+public string status { get; set; }
+
+-----------------------------------------------------
+### class JsonRead
+implements the "IReader" interface
+
+#### Methods: 
 public string GetData(string path)
 
 ----------------------------------------------------------
@@ -82,7 +108,6 @@ validator
 
 #### Methods:
 Parse() \
-Validate() \
 RightNewFile() \
 Exsecute()
 
@@ -121,6 +146,9 @@ private string GetThreeModelsWithHighestAverageFlightHours()
 -----------------------------------------------
 ### class Validator
 checks whether the drone object is valid.
+
+#### constractor:
+private List type:Drone _validatedDrones;
 
 #### Methods:
 public bool Excecute(Dronr drone) \
