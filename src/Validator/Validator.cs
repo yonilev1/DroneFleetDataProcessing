@@ -92,7 +92,9 @@ namespace DroneFleetDataProcessingSystem.ValidatorClass
         }
         private bool isValidMissionsCompleted(int missionsCompleted)
         {
-
+            if (missionsCompleted < 0 ||  missionsCompleted > 5000)
+                return false;
+            return true;
         }
         private bool isValidStatus(string status)
         {
