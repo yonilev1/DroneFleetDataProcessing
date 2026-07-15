@@ -31,6 +31,10 @@ namespace DroneFleetDataProcessing.Report
         {
             return _drones.OrderByDescending(d => d.flightHours).Take(5);
         }
+        private IEnumerable<String> GetAllDitictTyps()
+        {
+            return _drones.Select(d => d.model).Distinct();
+        }
         
     }
 }
