@@ -19,25 +19,28 @@ namespace DroneFleetDataProcessing.Report
         {
 
         }
-        private IEnumerable<Drone> OnOperations()
+        private IEnumerable<string> OnOperations()
         {
-            return _drones.Where(d => d.status != "Operational");
+            return _drones.Where(d => d.status != "Operational").Select(d=>$"{d.serialNumber} | {d.model} | {d.base_location} | {d.status}");
         }
+
+        private IEnumerable<string> TopFiveFlingHours()
+        {
+            return _drones.OrderByDescending(d => d.flightHours).Take(5).Select(d=>$"{d.serialNumber} | {d.model} | {d.flightHours}");
+        }
+
         private int CountValidData()
         {
             return _allDataLen - _drones.Count;
         }
-        private IEnumerable<Drone> TopFiveFlingHours()
-        {
-            return _drones.OrderByDescending(d => d.flightHours).Take(5);
-        }
+        
         private IEnumerable<String> GetAllDitictTyps()
         {
             return _drones.Select(d => d.model).Distinct();
         }
         private IEnumerable<String> GetNumberOfdronsPerbase()
         {
-            return _drones.GroupBy(d => d.baseLocation)
+            return _drones.GroupBy(d => d.base_location)
                 .Select(b => $"{b.Key}: {b.Count()}");
         }
         
