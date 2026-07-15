@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "MRHStGV54qM=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Yonil\\source\\repos\\DroneFleetDataProcessing\\DroneFleetDataProcessing.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Yonil\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.23.0\\microsoft.visualstudio.azure.containers.tools.targets.1.23.0.nupkg.sha512"
+  ],
+  "logs": []
+}
