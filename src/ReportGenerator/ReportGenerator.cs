@@ -23,22 +23,6 @@ namespace DroneFleetDataProcessing.Report
         {
             return _drones.Where(d => d.status != "Operational");
         }
-        private int CountValidData()
-        {
-            return _allDataLen - _drones.Count;
-        }
-        private IEnumerable<Drone> TopFiveFlingHours()
-        {
-            return _drones.OrderByDescending(d => d.flightHours).Take(5);
-        }
-        private IEnumerable<String> GetAllDitictTyps()
-        {
-            return _drones.Select(d => d.model).Distinct();
-        }
-        private string GetNumberOfdronsPerbase()
-        private string AvergeBetteryByType()
-        private string GetModelWithMostConpliteTasks()
-        private string GetBasesWithOperationalDronesBatteryAbove80()
-        private string GetThreeModelsWithHighestAverageFlightHours()
+        
     }
 }
