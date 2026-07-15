@@ -43,6 +43,18 @@ namespace DroneFleetDataProcessing.Report
             return _drones.GroupBy(d => d.base_location)
                 .Select(b => $"{b.Key}: {b.Count()}");
         }
-        
+        private IEnumerable<string> AverageBatteryByType()
+        {
+            return _drones
+                .GroupBy(d => d.model)
+                .Select(g => $"{g.Key}: {g.Average(d => d.batteryHealth)}%");
+        }
+        private string GetModelWithMostCompletedTasks()
+        {
+            return _drones.GroupBy(d => d.model)
+                .OrderByDescending(g => g.Sum(d => d.missionsCompleted))
+                .Select(g => g.Key).First();                                
+                                                       
+        }
     }
 }
