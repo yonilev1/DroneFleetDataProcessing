@@ -40,9 +40,6 @@ namespace DroneFleetDataProcessing.Report
             return _drones.GroupBy(d => d.baseLocation)
                 .Select(b => $"{b.Key}: {b.Count()}");
         }
-        private string AvergeBetteryByType()
-        private string GetModelWithMostConpliteTasks()
-        private string GetBasesWithOperationalDronesBatteryAbove80()
-        private string GetThreeModelsWithHighestAverageFlightHours()
+        
     }
 }
