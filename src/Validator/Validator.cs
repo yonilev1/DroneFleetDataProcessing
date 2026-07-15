@@ -16,27 +16,16 @@ namespace DroneFleetDataProcessing.ValidatorClass
         }
         public bool Excecute(Drone drone)
         {
-            if(!IsValidId(drone.id))
-                return false;
-            if(!IsValidSerialNumber(drone.serialNumber))
-                return false;
-            if(!IsValidModel(drone.model))
-                return false;  
-            if(!IsValidCategory(drone.category))
-                return false;
-            if(!IsValidBaseLocatoins(drone.baseLocation))
-                return false;
-            if(!IsValidFlithHours(drone.flightHours))
-                return false;
-            if(!IsValidBaterryHelth(drone.batteryHealth))
-                return false;
-            if(!IsValidMaxRenge(drone.maxRangeKm))
-                return false;
-            if(!IsValidMissionsCompleted(drone.missionsCompleted))
-                return false;
-            if(!IsValidStatus(drone.status))
-                return false;
-            return true;
+            return IsValidId(drone.id)
+                && IsValidSerialNumber(drone.serialNumber)
+                && IsValidModel(drone.model)
+                && IsValidCategory(drone.category)
+                && IsValidBaseLocatoins(drone.baseLocation)
+                && IsValidFlithHours(drone.flightHours)
+                && IsValidBaterryHelth(drone.batteryHealth)
+                && IsValidMaxRenge(drone.maxRangeKm)
+                && IsValidMissionsCompleted(drone.missionsCompleted)
+                && IsValidStatus(drone.status);
         }
         private bool IsValidId(int id)
         {
