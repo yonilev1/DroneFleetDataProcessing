@@ -1,8 +1,8 @@
-using Ireader.ireader;
+using DroneFleetDataProcessing.Ireader;
 using System.IO;
-namespace Reader.reader;
+namespace DroneFleetDataProcessing.reader;
 
-class Reader:IReader
+class JsonReader:IReader
 {
     public string GetData(string path)
     {
