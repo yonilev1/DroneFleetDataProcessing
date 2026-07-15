@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 using DroneFleetDataProcessing.drone;
 namespace DroneFleetDataProcessingSystem.ValidatorClass
 {
-    class Validator
+    class DroneValidator
     {
         private HashSet<string> _validModel = new()
         {
@@ -31,7 +31,7 @@ namespace DroneFleetDataProcessingSystem.ValidatorClass
             "West"
         };
         private List<Drone> _validatedDrones;
-        public Validator(List<Drone> drones)
+        public DroneValidator(List<Drone> drones)
         {
             
             _validatedDrones = drones;
