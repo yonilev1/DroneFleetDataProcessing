@@ -56,5 +56,21 @@ namespace DroneFleetDataProcessing.Report
                 .Select(g => g.Key).First();                                
                                                        
         }
+
+        private IEnumerable<string> GetBasesWithOperationalDronesBatteryAbove80()
+        {
+            return _drones
+                .Where(d => d.status == "Operational" && d.batteryHealth > 80)
+                .Select(d => d.base_location)
+                .Distinct();
+        }
+        private IEnumerable<string> GetThreeModelsWithHighestAverageFlightHours()
+        {
+            return _drones
+                .GroupBy(d => d.model)                                        
+                .OrderByDescending(g => g.Average(d => d.flightHours))  
+                .Select(g => g.Key)   
+                .Take(3);                              
+        }
     }
 }
