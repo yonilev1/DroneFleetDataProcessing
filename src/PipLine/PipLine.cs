@@ -8,4 +8,5 @@ class Piline
     private string _data;
     private string _outputPath;
     private DroneValidator _validator;
+    private List
 }

@@ -1,5 +1,0 @@
-C:\Users\Yonil\source\repos\DroneFleetDataProcessing\obj\Debug\net10.0\DroneFleetDataProcessing.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Yonil\source\repos\DroneFleetDataProcessing\obj\Debug\net10.0\DroneFleetDataProcessing.AssemblyInfoInputs.cache
-C:\Users\Yonil\source\repos\DroneFleetDataProcessing\obj\Debug\net10.0\DroneFleetDataProcessing.AssemblyInfo.cs
-C:\Users\Yonil\source\repos\DroneFleetDataProcessing\obj\Debug\net10.0\DroneFleetDataProcessing.csproj.CoreCompileInputs.cache
-C:\Users\Yonil\source\repos\DroneFleetDataProcessing\obj\Debug\net10.0\DroneFleetDataProcessing.sourcelink.json
