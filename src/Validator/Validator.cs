@@ -5,6 +5,31 @@ namespace DroneFleetDataProcessingSystem.ValidatorClass
 {
     class Validator
     {
+        private HashSet<string> _validModel = new()
+        {
+            "Falcon-X",
+            "Raven-M",
+            "SkyEye-2",
+            "CargoBee",
+            "Storm-4",
+            "Scout-Lite"
+        };
+        private HashSet<string> _validCategory = new()
+        {
+            "Recon",
+            "Patrol",
+            "Mapping",
+            "Delivery",
+            "Search"
+        };
+        private HashSet<string> _validBaseLocation = new()
+        {
+            "North",
+            "South",
+            "Central",
+            "East",
+            "West"
+        };
         private List<Drone> _validatedDrones;
         public Validator(List<Drone> drones)
         {
@@ -31,15 +56,21 @@ namespace DroneFleetDataProcessingSystem.ValidatorClass
         }
         private bool IsValidModel(string model)
         {
-
+            if (! _validModel.Contains(model))
+                return false;
+            return true;
         }
         private bool IsValidCategory(string category)
         {
-
+            if (!_validCategory.Contains(category))
+                return false;
+            return true;
         }
         private bool isValidBaseLocatoins(string baseLocations)
         {
-
+            if(!_validBaseLocation.Contains(baseLocations))
+                return false;
+            return true;
         }
         private bool isValidFlithHours(double flithHours)
         {
