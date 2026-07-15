@@ -1,8 +1,9 @@
-﻿using System.IO;
-using DroneFleetDataProcessing.customexceptions;
+﻿using DroneFleetDataProcessing.customexceptions;
+using DroneFleetDataProcessing.drone;
 using DroneFleetDataProcessing.pipline;
 using DroneFleetDataProcessing.reader;
 using DroneFleetDataProcessing.ValidatorClass;
+using System.IO;
 
 class Program
 {
@@ -18,9 +19,6 @@ class Program
         string outputFileName = "drones_clean.json";
         string outputPath = Path.Combine(baseDirectory, outputFoldername, outputFileName);
 
-        JsonReader jsonreader = new JsonReader();
-        string allDroneDataString = jsonreader.GetData(inputPath);
-
-        Pipline pipline = new Pipline(allDroneDataString, outputPath);
+        Pipline pipline = new Pipline(inputPath, outputPath);
     }
 }
