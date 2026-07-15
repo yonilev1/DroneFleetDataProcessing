@@ -23,6 +23,10 @@ namespace DroneFleetDataProcessing.Report
         {
             return _drones.Where(d => d.status != "Operational");
         }
+        private int CountValidData()
+        {
+            return _allDataLen - _drones.Count;
+        }
         
     }
 }
