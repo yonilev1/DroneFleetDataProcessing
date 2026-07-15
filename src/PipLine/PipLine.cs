@@ -103,7 +103,7 @@ namespace DroneFleetDataProcessing.pipeline
             WriteNewFile();
 
             List<Drone>FilteredDrons = reader.GetData(OutputPath);
-            ReportGenerator report = new ReportGenerator(OutputPath, rawDrones.Count, drones);
+            ReportGenerator report = new ReportGenerator(OutputPath, rawDrones.Count, FilteredDrons);
         }
     }
 }
