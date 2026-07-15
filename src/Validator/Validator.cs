@@ -8,35 +8,42 @@ namespace DroneFleetDataProcessing.ValidatorClass
     {
         SetDrone sd = new SetDrone();
         
-        private List<Drone> _validatedDrones;
+        private List<Drone> _allDrones;
         public DroneValidator(List<Drone> drones)
         {
-            
-            _validatedDrones = drones;
+
+            _allDrones = drones;
         }
         public bool Excecute(Drone drone)
         {
-            return IsValidId(drone.id)
-                && IsValidSerialNumber(drone.serialNumber)
+            return IsValidId(drone)
+                && IsValidSerialNumber(drone)
                 && IsValidModel(drone.model)
                 && IsValidCategory(drone.category)
                 && IsValidBaseLocatoins(drone.base_location)
                 && IsValidFlithHours(drone.flightHours)
-                && IsValidBaterryHelth(drone.batteryHealth)
+                && IsValidBaterryHelth(drone.batteryHealth, drone.status)
                 && IsValidMaxRenge(drone.maxRangeKm)
                 && IsValidMissionsCompleted(drone.missionsCompleted)
                 && IsValidStatus(drone.status);
         }
-        private bool IsValidId(int? id)
+        private bool IsValidId(Drone currentDrone)
         {
-            if (_validatedDrones.Any(x => x.id == id) || id < 1)
+            if (currentDrone.id < 1)
                 return false;
-            
+
+            if (_allDrones.Any(x => x.id == currentDrone.id && !ReferenceEquals(x, currentDrone)))
+                return false;
+
             return true;
         }
-        private bool IsValidSerialNumber(string? SN)
+
+        private bool IsValidSerialNumber(Drone currentDrone)
         {
-            if (_validatedDrones.Any(x => x.serialNumber == SN) || !Regex.IsMatch(SN, @"^DR-\d{4}$"))
+            if (!Regex.IsMatch(currentDrone.serialNumber, @"^DR-\d{4}$"))
+                return false;
+
+            if (_allDrones.Any(x => x.serialNumber == currentDrone.serialNumber && !ReferenceEquals(x, currentDrone)))
                 return false;
 
             return true;
@@ -65,9 +72,11 @@ namespace DroneFleetDataProcessing.ValidatorClass
                 return false;
             return true;
         }
-        private bool IsValidBaterryHelth(int? baterryHlth)
+        private bool IsValidBaterryHelth(int? baterryHlth, string? status)
         {
             if (baterryHlth < 0 ||  baterryHlth > 100)
+                return false;
+            if (baterryHlth < 20 && status == "Operational")
                 return false;
             return true;
         }

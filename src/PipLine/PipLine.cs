@@ -22,7 +22,6 @@ namespace DroneFleetDataProcessing.pipeline
             InputFilePath = inputFilePath;
             OutputPath = outputPath;
             ValidDroneReports = new List<Drone>();
-            Validator = new DroneValidator(ValidDroneReports);
         }
 
         private void WriteNewFile()
@@ -51,6 +50,7 @@ namespace DroneFleetDataProcessing.pipeline
             {
                 rawDrones = reader.GetData(InputFilePath);
                 Console.WriteLine($"Read {rawDrones.Count} records from raw file");
+                Validator = new DroneValidator(rawDrones);
             }
             catch (FileNotFoundException ex)
             {
