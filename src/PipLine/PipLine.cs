@@ -40,7 +40,7 @@ namespace DroneFleetDataProcessing.pipeline
             }
         }
 
-        public void ExecutePipeline(string inputFilePath)
+        public void ExecutePipeline()
         {
             Console.WriteLine("Step 1: Reading raw data...");
 
@@ -49,12 +49,12 @@ namespace DroneFleetDataProcessing.pipeline
 
             try
             {
-                rawDrones = reader.GetData(inputFilePath);
+                rawDrones = reader.GetData(InputFilePath);
                 Console.WriteLine($"Read {rawDrones.Count} records from raw file");
             }
             catch (FileNotFoundException ex)
             {
-                Console.WriteLine($"Error: {ex.GetType().Name} - File '{inputFilePath}' not found.");
+                Console.WriteLine($"Error: {ex.GetType().Name} - File '{InputFilePath}' not found.");
                 return;
             }
             catch (UnauthorizedAccessException ex)
