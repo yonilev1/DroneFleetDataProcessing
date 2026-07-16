@@ -14,14 +14,16 @@ namespace DroneFleetDataProcessing.pipeline
     {
         public string InputFilePath { get; set; }
         public string OutputPath { get; set; }
+        public string OutputTxtPath { get; set; }
         public DroneValidator Validator { get; set; }
         public List<Drone> ValidDroneReports { get; set; }
 
-        public Pipeline(string inputFilePath, string outputPath)
+        public Pipeline(string inputFilePath, string outputPath, string outputTxtPath)
         {
 
             InputFilePath = inputFilePath;
             OutputPath = outputPath;
+            OutputTxtPath = outputTxtPath;
             ValidDroneReports = new List<Drone>();
         }
 
@@ -39,6 +41,13 @@ namespace DroneFleetDataProcessing.pipeline
             {
                 Console.WriteLine($"Error writing to file {OutputPath}: {ex.Message}");
             }
+        }
+
+        private void GenerateReport(int numofalldrones, JsonReader reader)
+        {
+            List<Drone> FilteredDrons = reader.GetData(OutputPath);
+            ReportGenerator report = new ReportGenerator(OutputTxtPath, numofalldrones, FilteredDrons);
+            report.Execute();
         }
 
         public void ExecutePipeline()
@@ -101,9 +110,8 @@ namespace DroneFleetDataProcessing.pipeline
             }
 
             WriteNewFile();
-
-            List<Drone>FilteredDrons = reader.GetData(OutputPath);
-            ReportGenerator report = new ReportGenerator(OutputPath, rawDrones.Count, FilteredDrons);
+            GenerateReport(rawDrones.Count, reader);
+            
         }
     }
 }
