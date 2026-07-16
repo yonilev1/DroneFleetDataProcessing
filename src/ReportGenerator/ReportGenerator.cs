@@ -88,12 +88,18 @@ namespace DroneFleetDataProcessing.Report
                 .GroupBy(d => d.model)
                 .Select(g => $"{g.Key}: {g.Average(d => d.batteryHealth)}%");
         }
-        private string GetModelWithMostCompletedTasks()
+        private (string Model, int? TaskCount) GetModelWithMostCompletedTasks()
         {
-            return _drones.GroupBy(d => d.model)
-                .OrderByDescending(g => g.Sum(d => d.missionsCompleted))
-                .Select(g => g.Key).First();                                
-                                                       
+            var result = _drones
+                .GroupBy(d => d.model)
+                .Select(g => new
+                {
+                    Model = g.Key,
+                    TotalCompleted = g.Sum(d => d.missionsCompleted)
+                })
+                .OrderByDescending(r => r.TotalCompleted)
+                .FirstOrDefault();
+            return (result.Model, result.TotalCompleted);
         }
 
         private IEnumerable<string> GetBasesWithOperationalDronesBatteryAbove80()
