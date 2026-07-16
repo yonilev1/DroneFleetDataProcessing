@@ -18,6 +18,7 @@ class Program
 
         string outputFoldername = "output";
         string outputFileName = "drones_clean.json";
+        string outputTxtFile = "analysis_report.txt";
 
         string outputDirectoryPath = Path.Combine(baseDirectory, outputFoldername);
         if (!Directory.Exists(outputDirectoryPath))
@@ -26,8 +27,9 @@ class Program
         }
 
         string outputPath = Path.Combine(outputDirectoryPath, outputFileName);
+        string outputTxtFullPath = Path.Combine(outputDirectoryPath, outputTxtFile);
 
-        Pipeline pipline = new Pipeline(inputPath, outputPath);
+        Pipeline pipline = new Pipeline(inputPath, outputPath, outputTxtFullPath);
         try
         {
             pipline.ExecutePipeline();
