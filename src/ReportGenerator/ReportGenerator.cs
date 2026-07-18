@@ -16,71 +16,151 @@ class ReportGenerator
         _allDataLen = allDataLen;
         _drones = drones;
     }
-
     public void Execute()
     {
-        
         File.WriteAllText(_outPutPath,
             "DRONE FLEET ANALYSIS REPORT\n\n" +
             "PROCESSING SUMMARY\n" +
-            $"Total raw records: {_allDataLen}\n" +
-            $"Valid records: {_drones.Count}\n" +
-            $"Rejected records: {RegectedData()}\n\n" +
+            "Total raw records: " + _allDataLen + "\n" +
+            "Valid records: " + _drones.Count + "\n" +
+            "Rejected records: " + RegectedData() + "\n\n" +
             "NON-OPERATIONAL DRONES\n");
 
-        foreach (string drone in OnOperations())
+
+        var nonOperational = OnOperations();
+
+        if (nonOperational.Any())
         {
-            File.AppendAllText(_outPutPath, $"{drone}\n");
+            foreach (string drone in nonOperational)
+            {
+                File.AppendAllText(_outPutPath, $"{drone}\n");
+            }
         }
+        else
+        {
+            File.AppendAllText(_outPutPath, "No results found\n");
+        }
+
         File.AppendAllText(_outPutPath, "\n");
 
-        
+
         File.AppendAllText(_outPutPath, "TOP 5 DRONES BY FLIGHT HOURS\n");
-        int count = 1; 
-        foreach (string item in TopFiveFlingHours())
+
+        var topDrones = TopFiveFlingHours();
+
+        if (topDrones.Any())
         {
-            File.AppendAllText(_outPutPath, $"{count}. {item}\n");
-            count++;
+            int count = 1;
+
+            foreach (string item in topDrones)
+            {
+                File.AppendAllText(_outPutPath, $"{count}. {item}\n");
+                count++;
+            }
         }
+        else
+        {
+            File.AppendAllText(_outPutPath, "No results found\n");
+        }
+
         File.AppendAllText(_outPutPath, "\n");
 
-        
+
         File.AppendAllText(_outPutPath, "AVAILABLE DRONE MODELS\n");
-        foreach (string type in GetAllDitictTyps())
+
+        var types = GetAllDitictTyps();
+
+        if (types.Any())
         {
-            File.AppendAllText(_outPutPath, $"{type}\n");
+            foreach (string type in types)
+            {
+                File.AppendAllText(_outPutPath, $"{type}\n");
+            }
         }
+        else
+        {
+            File.AppendAllText(_outPutPath, "No results found\n");
+        }
+
         File.AppendAllText(_outPutPath, "\n");
 
-        
+
         File.AppendAllText(_outPutPath, "DRONES BY BASE\n");
-        foreach (string item in GetNumberOfdronsPerbase())
+
+        var bases = GetNumberOfdronsPerbase();
+
+        if (bases.Any())
         {
-            File.AppendAllText(_outPutPath, $"{item}\n");
+            foreach (string item in bases)
+            {
+                File.AppendAllText(_outPutPath, $"{item}\n");
+            }
         }
+        else
+        {
+            File.AppendAllText(_outPutPath, "No results found\n");
+        }
+
         File.AppendAllText(_outPutPath, "\n");
 
 
         File.AppendAllText(_outPutPath, "AVERAGE BATTERY HEALTH BY MODEL\n");
-        foreach (string item in AverageBatteryByType())
+
+        var battery = AverageBatteryByType();
+
+        if (battery.Any())
         {
-            File.AppendAllText(_outPutPath, $"{item}\n");
+            foreach (string item in battery)
+            {
+                File.AppendAllText(_outPutPath, $"{item}\n");
+            }
         }
+        else
+        {
+            File.AppendAllText(_outPutPath, "No results found\n");
+        }
+
         File.AppendAllText(_outPutPath, "\n");
 
 
-        File.AppendAllText(_outPutPath, "MODEL WITH HIGHEST TOTAL COMPLETED MISSIONS\n");
+        File.AppendAllText(_outPutPath,
+            "MODEL WITH HIGHEST TOTAL COMPLETED MISSIONS\n");
+
         var (topModel, missions) = GetModelWithMostCompletedTasks();
-        File.AppendAllText(_outPutPath, $"Model: {topModel ?? "N/A"}\n");
-        File.AppendAllText(_outPutPath, $"Total completed missions: {missions ?? 0}\n\n");
 
-
-        File.AppendAllText(_outPutPath, "SELECTED ADDITIONAL ANALYSIS\n");
-        File.AppendAllText(_outPutPath, "Analysis name: Bases with Operational Drones (Battery > 80%)\n");
-        foreach (var baseLocation in GetBasesWithOperationalDronesBatteryAbove80())
+        if (topModel != null)
         {
-            File.AppendAllText(_outPutPath, $"- {baseLocation}\n");
+            File.AppendAllText(_outPutPath, $"Model: {topModel}\n");
+            File.AppendAllText(_outPutPath,
+                $"Total completed missions: {missions}\n\n");
         }
+        else
+        {
+            File.AppendAllText(_outPutPath, "No results found\n\n");
+        }
+
+
+        File.AppendAllText(_outPutPath,
+            "SELECTED ADDITIONAL ANALYSIS\n");
+
+        File.AppendAllText(_outPutPath,
+            "Analysis name: Bases with Operational Drones (Battery > 80%)\n");
+
+
+        var analysis = GetBasesWithOperationalDronesBatteryAbove80();
+
+        if (analysis.Any())
+        {
+            foreach (var baseLocation in analysis)
+            {
+                File.AppendAllText(_outPutPath, $"- {baseLocation}\n");
+            }
+        }
+        else
+        {
+            File.AppendAllText(_outPutPath, "No results found\n");
+        }
+
 
         Console.WriteLine("Step 5: Performing analysis... Analysis completed successfully");
         Console.WriteLine($"Step 6: Generating report... Report generated successfully: {_outPutPath}");
