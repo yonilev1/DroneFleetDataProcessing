@@ -1,4 +1,4 @@
-﻿namespace exception.customexceptions;
+﻿namespace DroneFleetDataProcessing.customexceptions;
 
 class UnserelazeblleDataException:Exception
 {

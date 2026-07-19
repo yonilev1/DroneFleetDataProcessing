@@ -1,65 +1,102 @@
 using System;
 using System.Text.RegularExpressions;
+using DroneFleetDataProcessing.SetClass;
 using DroneFleetDataProcessing.drone;
-namespace DroneFleetDataProcessingSystem.ValidatorClass
+namespace DroneFleetDataProcessing.ValidatorClass
 {
-    class Validator
+    class DroneValidator
     {
-        private List<Drone> _validatedDrones;
-        public Validator(List<Drone> drones)
+        SetDrone sd = new SetDrone();
+        
+        private List<Drone> _allDrones;
+        public DroneValidator(List<Drone> drones)
         {
-            
-            _validatedDrones = drones;
+
+            _allDrones = drones;
         }
         public bool Excecute(Drone drone)
         {
-            return true;
+            return IsValidId(drone)
+                && IsValidSerialNumber(drone)
+                && IsValidModel(drone.model)
+                && IsValidCategory(drone.category)
+                && IsValidBaseLocatoins(drone.base_location)
+                && IsValidFlithHours(drone.flightHours)
+                && IsValidBaterryHelth(drone.batteryHealth, drone.status)
+                && IsValidMaxRenge(drone.maxRangeKm)
+                && IsValidMissionsCompleted(drone.missionsCompleted)
+                && IsValidStatus(drone.status);
         }
-        private bool IsValidId(int id)
+        private bool IsValidId(Drone currentDrone)
         {
-            if (_validatedDrones.Any(x => x.id == id) || id < 1)
+            if (currentDrone.id < 1)
                 return false;
-            
-            return true;
-        }
-        private bool IsvalidSerialNumber(string SN)
-        {
-            if (_validatedDrones.Any(x => x.serialNumber == SN) || !Regex.IsMatch(SN, @"^DR-\d{4}$"))
+
+            if (_allDrones.Any(x => x.id == currentDrone.id && !ReferenceEquals(x, currentDrone)))
                 return false;
 
             return true;
         }
-        private bool IsValidModel(string model)
-        {
 
+        private bool IsValidSerialNumber(Drone currentDrone)
+        {
+            if (!Regex.IsMatch(currentDrone.serialNumber, @"^DR-\d{4}$"))
+                return false;
+
+            if (_allDrones.Any(x => x.serialNumber == currentDrone.serialNumber && !ReferenceEquals(x, currentDrone)))
+                return false;
+
+            return true;
         }
-        private bool IsValidCategory(string category)
+        private bool IsValidModel(string? model)
         {
-
+            if (!sd.ValidModel.Contains(model))
+                return false;
+            return true;
         }
-        private bool isValidBaseLocatoins(string baseLocations)
+        private bool IsValidCategory(string? category)
         {
-
+            if (!sd.ValidCategory.Contains(category))
+                return false;
+            return true;
         }
-        private bool isValidFlithHours(double flithHours)
+        private bool IsValidBaseLocatoins(string? baseLocations)
         {
-
+            if(!sd.ValidBaseLocation.Contains(baseLocations))
+                return false;
+            return true;
         }
-        private bool isValidBaterryHelth(int baterryHlth)
+        private bool IsValidFlithHours(double? flithHours)
         {
-
+            if (flithHours < 0 || flithHours > 2500)
+                return false;
+            return true;
         }
-        private bool isValidMaxRenge(int maxRenge)
+        private bool IsValidBaterryHelth(int? baterryHlth, string? status)
         {
-
+            if (baterryHlth < 0 ||  baterryHlth > 100)
+                return false;
+            if (baterryHlth < 20 && status == "Operational")
+                return false;
+            return true;
         }
-        private bool isValidMissionsCompleted(int missionsCompleted)
+        private bool IsValidMaxRenge(double? maxRenge)
         {
-
+            if(maxRenge < 1 ||  maxRenge > 150)
+                return false;
+            return true;
         }
-        private bool isValidStatus(string status)
+        private bool IsValidMissionsCompleted(int? missionsCompleted)
         {
-
+            if (missionsCompleted < 0 ||  missionsCompleted > 5000)
+                return false;
+            return true;
+        }
+        private bool IsValidStatus(string? status)
+        {
+            if(!sd.ValidStatus.Contains(status))
+                return false;
+            return true;
         }
     }
 }

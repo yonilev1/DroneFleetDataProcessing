@@ -8,8 +8,32 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="output\**" />
+    <EmbeddedResource Remove="output\**" />
+    <None Remove="output\**" />
+  </ItemGroup>
+
    <ItemGroup>
 	   <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
+   </ItemGroup>
+
+   <ItemGroup>
+     <None Update="input\raw\drones_raw.json">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </None>
+     <None Update="input\test_scenarios\drones_all_invalid.json">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </None>
+     <None Update="input\test_scenarios\drones_empty.json">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </None>
+     <None Update="input\test_scenarios\drones_malformed.json">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </None>
+     <None Update="input\test_scenarios\drones_null.json">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </None>
    </ItemGroup>
 
 </Project>
